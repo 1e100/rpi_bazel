@@ -4,11 +4,9 @@ This contains a set of rules to use for cross compiling C++ to a
 Raspberry Pi using clang.  It includes a minimal sysroot, and only
 needs a functioning clang compiler.
 
-## Example Usage ##
+ * travis-ci [![Build Status](https://travis-ci.org/mjbots/rpi_bazel.svg?branch=master)](https://travis-ci.org/mjbots/rpi_bazel)
 
-```
-sudo apt install clang-6.0 lld-6.0
-```
+## Example Usage ##
 
 In `tools/workspace/rpi_bazel/repository.bzl`
 
@@ -62,10 +60,13 @@ test --crosstool_top=@rpi_bazel//tools/cc_toolchain:toolchain
 
 build:pi --cpu=armeabihf
 test:pi --cpu=armeabihf
+
+build:pi --compiler=clang
+test:pi --compiler=clang
 ```
 
-Then you can build and run tests with:
+Then you can build with:
 
 ```
-bazel test --config=pi //...
+bazel build --config=pi //...
 ```

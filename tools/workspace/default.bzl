@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright 2018 Josh Pieper, jjp@pobox.com.
+# Copyright 2018-2022 Josh Pieper, jjp@pobox.com.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@rpi_bazel//tools/workspace/raspberry_pi:repository.bzl", "raspberry_pi_repository")
+load("//tools/workspace/clang:repository.bzl", "clang_repository")
+load("//tools/workspace/raspberry_pi:repository.bzl", "raspberry_pi_repository")
 
 def add_default_repositories(excludes = []):
+    if "clang" not in excludes:
+        clang_repository()
     if "raspberry_pi" not in excludes:
-        raspberry_pi_repository(name = "raspberry_pi")
+        raspberry_pi_repository()
